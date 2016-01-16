@@ -1,0 +1,39 @@
+<!-- START Sidebar-->
+<div class="sidebar-wrapper">
+   <div ui-sidebar="" class="sidebar">
+      <div class="sidebar-nav">
+         <ul class="nav">
+            <!-- Iterates over all sidebar items-->
+            <li class="nav-heading">
+               <span translate="sidebar.heading.HEADER" class="text-muted">Navigation</span>
+            </li>
+            <li ng-class="{active:$state.includes('app')}">
+               <a href="" title="Gruppen" ripple="">
+                  <em class="sidebar-item-icon fa fa-users"></em>
+                  <em class="sidebar-item-caret fa pull-right fa-angle-right"></em>
+                  <span>Gruppen</span>
+               </a>
+               <ul class="nav sidebar-subnav">
+                  <li class="sidebar-subnav-header">
+                     <a>
+                        <em class="sidebar-item-icon fa fa-angle-right"></em>Gruppen</a>
+                  </li>
+                  <li ui-sref-active="active">
+                     <a ui-sref="app.dashboard" title="Meine Gruppen" ripple="">
+                        <em class="sidebar-item-icon"></em>
+                        <span>Meine Gruppen</span>
+                     </a>
+                  </li>
+                  <li ui-sref-active="active">
+                     <a ui-sref="app-dock.dashboard" title="Neue Gruppe" ripple="">
+                        <em class="sidebar-item-icon"></em>
+                        <span>Neue Gruppe</span>
+                     </a>
+                  </li>
+               </ul>
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>
+<!-- END Sidebar-->
