@@ -1,0 +1,13 @@
+<div class="app-view-header">Groups</div>
+<div ng-controller="GroupController" class="container-fluid">
+   <div class="text-center">
+      <h2>My groups</h2>
+      <p>{{title}}</p>
+   </div>
+   <table class="table">
+      <tr ng-repeat="group in groups">
+         <td>{{group.id}}</td>
+         <td>{{group.name}}</td>
+      </tr>
+   </table>
+</div>

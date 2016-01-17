@@ -35,7 +35,7 @@
         // Global settings
         $rootScope.app = {
           name:          'Siesta Key App',
-          description:   'App zur Verwaltung von Gruppen und Verabredungen',
+          description:   'App for administration of groups and appointments',
           year:          new Date().getFullYear(),
           views: {
             animation: 'ng-fadeInLeft2'
