@@ -12,7 +12,14 @@
 
                 $scope.status;
                 $scope.groups;
-                $scope.title = 'List of my groups';
+                $scope.group;
+                $scope.add = function(group) {
+                    console.log('Add group ...');
+                    console.dir(group);
+                    console.log('Call rest service to save data in backend ...');
+                    console.log('Do not submit data to backend if form is not already filled and valid...');
+                    addGroup(group);
+                };
 
                 getGroups();
 
@@ -23,6 +30,16 @@
                         })
                         .error(function (error) {
                             $scope.status = 'Unable to load groups data: ' + error.message;
+                        });
+                }
+
+                function addGroup(group) {
+                    rest.addGroup()
+                        .success(function (data) {
+                            $scope.group = data;
+                        })
+                        .error(function (error) {
+                            $scope.status = 'Unable to save group ' + error.message;
                         });
                 }
             }]);

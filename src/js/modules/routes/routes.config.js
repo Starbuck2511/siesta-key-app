@@ -38,34 +38,12 @@
                 templateUrl: Route.base('group.html'),
                 resolve: {}
             })
-            // Layout dock
-            .state('app-dock', {
-                url: '/dock',
-                abstract: true,
-                templateUrl: Route.base('app-dock.html'),
-                resolve: {
-                    assets: Route.require('icons', 'toaster', 'animate')
-                }
-            })
-            .state('app-dock.dashboard', {
-                url: '/dashboard',
-                templateUrl: Route.base('dashboard.html'),
+            .state('app.group-add', {
+                url: '/group/add',
+                templateUrl: Route.base('group-add.html'),
                 resolve: {}
             })
-            // Layout full height
-            .state('app-fh', {
-                url: '/fh',
-                abstract: true,
-                templateUrl: Route.base('app-fh.html'),
-                resolve: {
-                    assets: Route.require('icons', 'toaster', 'animate')
-                }
 
-            })
-            .state('app-fh.columns', {
-                url: '/columns',
-                templateUrl: Route.base('layout.columns.html')
-            })
     }
 
 })();

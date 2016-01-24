@@ -20,6 +20,10 @@
                 return $http.get(urlBase + '/groups/' + id);
             };
 
+            rest.addGroup = function (group) {
+                return $http.post(urlBase + '/groups', group);
+            };
+
             return rest;
         }]);
 
