@@ -9,9 +9,25 @@
         .module('naut')
         .run(appRun);
     /* @ngInject */   
-    function appRun($rootScope, $window) {
+    function appRun($rootScope, $window, $state, auth, AUTH_EVENTS) {
 
-      // Hook not found
+        // auth goes here ...
+        $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
+            if (!auth.isAuthenticated()) {
+                console.log('next name '+ next.name);
+                console.log('next params ' + nextParams);
+                console.log('from state ' + fromState);
+                console.log('auth events  ' + AUTH_EVENTS);
+
+                if (next.name !== 'outside.login' && next.name !== 'outside.register') {
+                    event.preventDefault();
+                    $state.go('outside.login');
+                    console.log('go to login ...');
+                }
+            }
+        });
+
+      // hook not found
       $rootScope.$on('$stateNotFound',
         function(event, unfoundState, fromState, fromParams) {
             console.log(unfoundState.to); // "lazy.state"
@@ -19,7 +35,7 @@
             console.log(unfoundState.options); // {inherit:false} + default options
         });
 
-      // Hook success
+      // hook success
       $rootScope.$on('$stateChangeSuccess',
         function(event, toState, toParams, fromState, fromParams) {
           // success here
@@ -28,7 +44,7 @@
         });
 
     }
-    appRun.$inject = ['$rootScope', '$window'];
+    appRun.$inject = ['$rootScope', '$window', '$state', 'auth', 'AUTH_EVENTS'];
 
 })();
 

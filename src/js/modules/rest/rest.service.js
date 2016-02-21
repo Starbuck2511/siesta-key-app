@@ -9,7 +9,7 @@
         .module('naut')
         .factory('rest', ['$http', function ($http) {
 
-            var urlBase = 'http://siesta-key.local/app_dev.php';
+            var urlBase = '';
             var rest = {};
 
             rest.getGroups = function () {

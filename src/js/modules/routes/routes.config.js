@@ -7,7 +7,8 @@
 
     angular
         .module('naut')
-        .config(routesConfig);
+        .config(routesConfig)
+        .config(authConfig);
 
     routesConfig.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider', 'RouteProvider'];
     function routesConfig($locationProvider, $stateProvider, $urlRouterProvider, Route) {
@@ -16,10 +17,26 @@
         $locationProvider.html5Mode(false);
 
         // Default route
-        $urlRouterProvider.otherwise('/app/home');
+        $urlRouterProvider.otherwise('/outside/login');
 
         // Application Routes States
         $stateProvider
+
+            .state('outside', {
+                url: '/outside',
+                abstract: true,
+                templateUrl: Route.base('outside.html')
+            })
+            .state('outside.login', {
+                url: '/login',
+                templateUrl: Route.base('login.html'),
+                resolve: {}
+            })
+            .state('outside.register', {
+                url: '/register',
+                templateUrl: Route.base('register.html'),
+                resolve: {}
+            })
             .state('app', {
                 url: '/app',
                 abstract: true,
@@ -44,6 +61,12 @@
                 resolve: {}
             })
 
+    }
+
+    // auth interceptor configuration
+    authConfig.$inject = ['$httpProvider'];
+    function authConfig($httpProvider) {
+        $httpProvider.interceptors.push('AuthInterceptor');
     }
 
 })();
