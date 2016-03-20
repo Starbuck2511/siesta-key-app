@@ -34,7 +34,7 @@
                 }
 
                 function addGroup(group) {
-                    rest.addGroup()
+                    rest.addGroup(group)
                         .success(function (data) {
                             $scope.group = data;
                         })

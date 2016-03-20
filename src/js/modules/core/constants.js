@@ -1,7 +1,3 @@
-/**=========================================================
- * Module: ColorsConstant.js
- =========================================================*/
-
 (function () {
     'use strict';
 
@@ -18,7 +14,7 @@
             notAuthenticated: 'auth-not-authenticated'
         })
         .constant('API_ENDPOINT', {
-            url: 'http://siesta-key.local/app_dev.php'
+            url: 'http://siesta-key.de/app_dev.php/api'
             //  For a simulator use: url: 'http://127.0.0.1:8080/api'
         });
 })();

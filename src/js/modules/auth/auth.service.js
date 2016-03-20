@@ -7,8 +7,9 @@
 
     angular
         .module('naut')
-        .factory('auth', ['$q', '$http', function ($q, $http, API_ENDPOINT) {
+        .factory('auth', ['$q', '$http', 'API_ENDPOINT', function ($q, $http, API_ENDPOINT) {
 
+            console.dir(API_ENDPOINT);
             var auth = {};
             var localTokenKey = 'siesta-key-auth-token';
             var userIsAuthenticated = false;
