@@ -7,17 +7,17 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="form-group has-feedback mb">
-                     <input id="email" type="email" placeholder="Your email" autocomplete="off" class="form-control">
+                     <input id="email" type="email" placeholder="Your email" autocomplete="off" class="form-control" required>
                      <span class="fa fa-envelope form-control-feedback text-muted"></span>
                   </div>
                   <br>
                   <div class="form-group has-feedback">
-                     <input id="password" type="password" placeholder="Your password" class="form-control">
+                     <input id="password" type="password" placeholder="Your password" class="form-control" required>
                      <span class="fa fa-lock form-control-feedback text-muted"></span>
                   </div>
                </div>
                <div class="col-md-12">
-                  <button type="submit" class="btn btn-block btn-info mb">Login</button>
+                  <button type="submit" ng-click="login()" class="btn btn-block btn-info mb">Login</button>
                </div>
             </div>
          </form>

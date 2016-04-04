@@ -9,7 +9,10 @@
         .module('naut')
         .controller('LoginController', ['$scope', 'rest',
             function ($scope, rest) {
-                console.log('login controller ...');
+
+                $scope.login = function() {
+                    console.log('login now ...');
+                };
 
             }]);
 })();
