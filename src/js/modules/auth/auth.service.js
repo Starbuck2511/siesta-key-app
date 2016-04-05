@@ -7,9 +7,8 @@
 
     angular
         .module('naut')
-        .factory('auth', ['$q', '$http', 'API_ENDPOINT', function ($q, $http, API_ENDPOINT) {
+        .factory('auth', ['$q', '$http', 'AUTH_ENDPOINT', function ($q, $http, AUTH_ENDPOINT) {
 
-            console.dir(API_ENDPOINT);
             var auth = {};
             var localTokenKey = 'siesta-key-auth-token';
             var userIsAuthenticated = false;
@@ -32,6 +31,7 @@
                 authToken = token;
                 // set the token as header for requests
                 $http.defaults.headers.common.Authorization = authToken;
+                $http.defaults.headers.common['X-Auth-Token'] = authToken;
             }
 
             function destroyUserCredentials() {
@@ -43,8 +43,8 @@
 
             var register = function (user) {
                 return $q(function (resolve, reject) {
-                    $http.post(API_ENDPOINT.url + '/signup', user).then(function (result) {
-                        if (result.data.success) {
+                    $http.post(AUTH_ENDPOINT.signupUrl, user).then(function (result) {
+                        if (200 === result.status) {
                             resolve(result.data.msg);
                         } else {
                             reject(result.data.msg);
@@ -53,15 +53,18 @@
                 });
             };
 
-            var login = function (user) {
+            var login = function (username, password) {
                 return $q(function (resolve, reject) {
-                    $http.post(API_ENDPOINT.url + '/login', user).then(function (result) {
-                        if (result.data.success) {
-                            storeUserCredentials(result.data.token);
-                            resolve(result.data.msg);
+                    var login = 'username=' + username + '&password=' + password;
+                    $http.post(AUTH_ENDPOINT.loginUrl, login).then(function (result) {
+                        if (200 === result.status) {
+                            storeUserCredentials(result.data.authToken);
+                            resolve(result.statusText);
                         } else {
-                            reject(result.data.msg);
+                            reject(result.statusText);
                         }
+                    }, function(result) {
+                        reject(result.statusText);
                     });
                 });
             };
@@ -86,7 +89,7 @@
         }])
 
         // interceptor for auth
-        .factory('AuthInterceptor', ['$rootScope', '$q', function ($rootScope, $q, AUTH_EVENTS) {
+        .factory('AuthInterceptor', ['$rootScope', '$q', 'AUTH_EVENTS', function ($rootScope, $q, AUTH_EVENTS) {
             return {
                 responseError: function (response) {
                     $rootScope.$broadcast({

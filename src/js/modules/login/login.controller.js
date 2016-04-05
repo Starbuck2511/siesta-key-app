@@ -7,12 +7,16 @@
 
     angular
         .module('naut')
-        .controller('LoginController', ['$scope', 'rest',
-            function ($scope, rest) {
+        .controller('LoginController', ['$scope', 'auth',
+            function ($scope, auth) {
 
-                $scope.login = function() {
-                    console.log('login now ...');
+                $scope.login = function(username, password) {
+
+                    auth.login(username, password).then(function(){
+                        console.log('Auth success');
+                    },function(){
+                        console.log('Auth failure');
+                    });
                 };
-
             }]);
 })();

@@ -14,10 +14,6 @@
                 $scope.groups;
                 $scope.group;
                 $scope.add = function(group) {
-                    console.log('Add group ...');
-                    console.dir(group);
-                    console.log('Call rest service to save data in backend ...');
-                    console.log('Do not submit data to backend if form is not already filled and valid...');
                     addGroup(group);
                 };
 
