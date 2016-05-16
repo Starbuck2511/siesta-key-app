@@ -10,7 +10,11 @@
         .factory('auth', ['$q', '$http', 'AUTH_ENDPOINT', function ($q, $http, AUTH_ENDPOINT) {
 
             var auth = {};
-            var localTokenKey = 'siesta-key-auth-token';
+            var localTokenKey = 'auth-token';
+            var localUserId = 'userid';
+            var localUserEmail = 'email';
+            var localUserName = 'username';
+
             var userIsAuthenticated = false;
             var authToken;
 
@@ -21,9 +25,24 @@
                 }
             }
 
-            function storeUserCredentials(token) {
-                window.localStorage.setItem(localTokenKey, token);
-                useCredentials(token);
+            function storeUserCredentials(data) {
+                window.localStorage.setItem(localTokenKey, data.authToken);
+                window.localStorage.setItem(localUserId, data.userid);
+                window.localStorage.setItem(localUserEmail, data.email);
+                window.localStorage.setItem(localUserName, data.username);
+                useCredentials(data.authToken);
+            }
+
+            function getUserInfo() {
+
+                var user = {};
+
+                user.id = window.localStorage.getItem(localUserId);
+                user.name = window.localStorage.getItem(localUserName);
+                user.email = window.localStorage.getItem(localUserEmail);
+
+                return user;
+
             }
 
             function useCredentials(token) {
@@ -42,23 +61,17 @@
             }
 
             var register = function (user) {
-                return $q(function (resolve, reject) {
-                    $http.post(AUTH_ENDPOINT.signupUrl, user).then(function (result) {
-                        if (200 === result.status) {
-                            resolve(result.data.msg);
-                        } else {
-                            reject(result.data.msg);
-                        }
-                    });
-                });
+                // register is done via iframe on symfony2
             };
 
             var login = function (username, password) {
                 return $q(function (resolve, reject) {
                     var login = 'username=' + username + '&password=' + password;
+
                     $http.post(AUTH_ENDPOINT.loginUrl, login).then(function (result) {
                         if (200 === result.status) {
-                            storeUserCredentials(result.data.authToken);
+                            console.log(result);
+                            storeUserCredentials(result.data);
                             resolve(result.statusText);
                         } else {
                             reject(result.statusText);
@@ -83,6 +96,7 @@
                 login: login,
                 register: register,
                 logout: logout,
+                getUserInfo: getUserInfo,
                 isAuthenticated: isAuthenticated
             };
 

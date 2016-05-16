@@ -39,7 +39,7 @@
 
     authConfig.$inject = ['$httpProvider'];
     function authConfig($httpProvider) {
-        var localTokenKey = 'siesta-key-auth-token';
+        var localTokenKey = 'auth-token';
         var token = window.localStorage.getItem(localTokenKey);
         $httpProvider.defaults.headers.common['X-Auth-Token'] = token;
         $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";

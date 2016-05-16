@@ -15,7 +15,7 @@
         })
         .constant('AUTH_ENDPOINT', {
             loginUrl: 'http://siesta-key.de/app_dev.php/login_check',
-            signupUrl: 'http://siesta-key.de/app_dev.php/signup'
+            signupUrl: 'http://siesta-key.de/app_dev.php/register/'
         })
         .constant('API_ENDPOINT', {
             url: 'http://siesta-key.de/app_dev.php/api'

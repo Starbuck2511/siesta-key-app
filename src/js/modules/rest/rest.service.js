@@ -7,12 +7,16 @@
 
     angular
         .module('naut')
-        .factory('rest', ['$http', 'API_ENDPOINT', function ($http, API_ENDPOINT) {
+        .factory('rest', ['$http', 'API_ENDPOINT', 'user', function ($http, API_ENDPOINT, user) {
 
             var rest = {};
 
             rest.getGroups = function () {
                 return $http.get(API_ENDPOINT.url + '/groups');
+            };
+
+            rest.getUserGroups = function () {
+                return $http.get(API_ENDPOINT.url + '/users/' + user.getId() + '/groups');
             };
 
             rest.getGroup = function (id) {

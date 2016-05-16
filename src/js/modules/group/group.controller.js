@@ -17,7 +17,7 @@
                     addGroup(group);
                 };
 
-                getGroups();
+                getUserGroups();
 
                 function getGroups() {
                     rest.getGroups()
@@ -28,6 +28,17 @@
                             $scope.status = 'Unable to load groups data: ' + error.message;
                         });
                 }
+
+                function getUserGroups() {
+                    rest.getUserGroups()
+                        .success(function (data) {
+                            $scope.groups = data;
+                        })
+                        .error(function (error) {
+                            $scope.status = 'Unable to load groups data: ' + error.message;
+                        });
+                }
+
 
                 function addGroup(group) {
                     rest.addGroup(group)

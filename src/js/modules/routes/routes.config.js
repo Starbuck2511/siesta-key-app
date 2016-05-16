@@ -50,9 +50,9 @@
                 templateUrl: Route.base('home.html'),
                 resolve: {}
             })
-            .state('app.group', {
-                url: '/group',
-                templateUrl: Route.base('group.html'),
+            .state('app.groups', {
+                url: '/groups',
+                templateUrl: Route.base('groups.html'),
                 resolve: {}
             })
             .state('app.group-add', {
